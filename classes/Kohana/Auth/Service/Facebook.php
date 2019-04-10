@@ -47,7 +47,7 @@ abstract class Kohana_Auth_Service_Facebook extends Auth_Service {
 
 		HTTP::redirect($logoutUrl);
 
-		return FALSE;
+		return false;
 	}
 
 	public function get_user_node()

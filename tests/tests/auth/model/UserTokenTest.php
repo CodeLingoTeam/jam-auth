@@ -23,7 +23,7 @@ class Auth_Model_UserTokenTest extends PHPUnit_Framework_TestCase {
 	{
 		$current_time = time();
 		$expected_sql = "DELETE FROM `test_user_tokens` WHERE `test_user_tokens`.`expires` < {$current_time}";
-		$sql = (string) Jam::delete('test_user_token')->expired(TRUE, $current_time);
+		$sql = (string) Jam::delete('test_user_token')->expired(true, $current_time);
 
 		$this->assertEquals($expected_sql, $sql);
 	}

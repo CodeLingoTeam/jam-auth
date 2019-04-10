@@ -3,9 +3,9 @@
 return array(
 	'services' => array(
 		'facebook' => array(
-			'enabled' => FALSE,
-			'auto_login' => FALSE,
-			'create_user' => TRUE,
+			'enabled' => false,
+			'auto_login' => false,
+			'create_user' => true,
 			// 'back_url' => '/',
 			'auth' => array(
 				'app_id' => '',
@@ -13,13 +13,13 @@ return array(
 			)
 		),
 		'twitter' => array(
-			'enabled' => FALSE,
+			'enabled' => false,
 			// 'back_url' => '/',
 			'auth' => array(
 				'consumer_key' => 'YOUR_CONSUMER_KEY',
 				'consumer_secret' => 'YOUR_CONSUMER_SECRET',
 			),
-			'create_user' => TRUE,
+			'create_user' => true,
 		),
 	),
 );

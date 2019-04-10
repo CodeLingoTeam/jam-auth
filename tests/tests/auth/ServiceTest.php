@@ -31,10 +31,10 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 
 	public function test_enabled()
 	{
-		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
+		$service = new Auth_Service_Facebook_Test(array('enabled' => true));
 		$this->assertTrue($service->enabled());
 
-		$service = new Auth_Service_Facebook_Test(array('enabled' => FALSE));
+		$service = new Auth_Service_Facebook_Test(array('enabled' => false));
 		$this->assertFalse($service->enabled());
 	}
 
@@ -75,10 +75,10 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 			->method('getField')
 			->willReturn('facebook-test');
 
-		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
+		$service = new Auth_Service_Facebook_Test(array('enabled' => true));
 		$service->api($facebook);
 
-		$user = $service->build_user(array('data' => 'data'), TRUE);
+		$user = $service->build_user(array('data' => 'data'), true);
 		$this->assertNotNull($user);
 		$this->assertTrue($user->roles->has('login'), 'Should assign login role');
 		$this->assertEquals('facebook-test', $user->facebook_uid, 'Should populate service id field');
@@ -126,14 +126,14 @@ class Auth_Jam_ServiceTest extends Testcase_Auth {
 			->method('asArray')
 			->willReturn(['email' => 'admin@example.com']);
 
-		$service = new Auth_Service_Facebook_Test(array('enabled' => TRUE));
+		$service = new Auth_Service_Facebook_Test(array('enabled' => true));
 		$service->api($facebook);
 
 		$user = $service->get_user();
 
 		$this->assertEquals(1, $user->id());
 
-		$user->set('facebook_uid', NULL)->save();
+		$user->set('facebook_uid', null)->save();
 
 		$user = $service->get_user();
 

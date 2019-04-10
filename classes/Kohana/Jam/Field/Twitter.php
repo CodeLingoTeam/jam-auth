@@ -22,7 +22,7 @@ class Kohana_Jam_Field_Twitter extends Jam_Field_Weblink {
 	 */
 	public function set(Jam_Validated $model, $value, $is_changed)
 	{
-		if ($value AND strpos($value, 'twitter.com') === FALSE)
+		if ($value AND strpos($value, 'twitter.com') === false)
 		{
 			if (substr($value, 0, 1) === '@')
 			{

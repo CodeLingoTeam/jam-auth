@@ -17,7 +17,7 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 	{
 		return array(
 			array(1, 'id'),
-			array(NULL, 'id'),
+			array(null, 'id'),
 			array('admin', 'username'),
 			array('user', 'username'),
 			array('login21', 'username'),
@@ -71,19 +71,19 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 	public function provider_validation()
 	{
 		return array(
-			array('email', 'new@example.com', TRUE),
-			array('email', 'example.com', FALSE),
-			array('email', 'user.asd@example.com', TRUE),
-			array('email', ' ', FALSE),
-			array('username', 'new-user', TRUE),
-			array('username', '', FALSE),
-			array('username', 'sm', FALSE),
-			array('username', 'hh345 345 -34', FALSE),
-			array('username', 'very_long_userna_very_long_userna_', FALSE),
-			array('password', 'new-password', TRUE),
-			array('last_login_ip', '34802', FALSE),
-			array('last_login_ip', '10.10.10', FALSE),
-			array('last_login_ip', '10.0.0.1', TRUE),
+			array('email', 'new@example.com', true),
+			array('email', 'example.com', false),
+			array('email', 'user.asd@example.com', true),
+			array('email', ' ', false),
+			array('username', 'new-user', true),
+			array('username', '', false),
+			array('username', 'sm', false),
+			array('username', 'hh345 345 -34', false),
+			array('username', 'very_long_userna_very_long_userna_', false),
+			array('password', 'new-password', true),
+			array('last_login_ip', '34802', false),
+			array('last_login_ip', '10.10.10', false),
+			array('last_login_ip', '10.0.0.1', true),
 		);
 	}
 
@@ -112,9 +112,9 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 	public function provider_validate_password()
 	{
 		return array(
-			array(array('password' => 'new-password', 'password_confirmation' => ''), FALSE),
-			array(array('password' => 'new-password', 'password_confirmation' => 'old-password'), FALSE),
-			array(array('password' => 'new-password', 'password_confirmation' => 'new-password'), TRUE),
+			array(array('password' => 'new-password', 'password_confirmation' => ''), false),
+			array(array('password' => 'new-password', 'password_confirmation' => 'old-password'), false),
+			array(array('password' => 'new-password', 'password_confirmation' => 'new-password'), true),
 		);
 	}
 
@@ -133,7 +133,7 @@ class Auth_Model_UserTest extends PHPUnit_Framework_TestCase {
 
 		$user->set($params);
 
-		$user->validate_password = TRUE;
+		$user->validate_password = true;
 
 		$this->assertEquals($is_valid, $user->check(), 'The check should return '.($is_valid ? 'TRUE' : 'FALSE').', errors '.$user->errors());
 	}

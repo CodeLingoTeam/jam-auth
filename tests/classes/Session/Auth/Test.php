@@ -14,12 +14,12 @@ class Session_Auth_Test extends Session {
 	 * @param   string  $id  session id
 	 * @return  null
 	 */
-	protected function _read($id = NULL)
+	protected function _read($id = null)
 	{
 		$_SESSION = array();
 		$this->_data =& $_SESSION;
 
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -37,7 +37,7 @@ class Session_Auth_Test extends Session {
 	{
 		$this->_data =& $_SESSION;
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -49,7 +49,7 @@ class Session_Auth_Test extends Session {
 		// Use the $_SESSION global for storing data
 		$this->_data =& $_SESSION;
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -59,7 +59,7 @@ class Session_Auth_Test extends Session {
 	{
 		$_SESSION = array();
 
-		return TRUE;
+		return true;
 	}
 
 } // End Session_Native

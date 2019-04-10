@@ -37,12 +37,12 @@ class Auth_JamTest extends Testcase_Auth {
 		$user = Jam::find('test_user', 1);
 
 		return array(
-			array(array(NULL, 'qweqwe'), TRUE),
-			array(array('email', 'qweqwe'), TRUE),
-			array(array(NULL, 'qweqwe2'), FALSE),
-			array(array('username', 'qweqwe2'), FALSE),
-			array(array('email', 'qweqwe2'), FALSE),
-			array(array('wrong', 'qweqwe'), FALSE),
+			array(array(null, 'qweqwe'), true),
+			array(array('email', 'qweqwe'), true),
+			array(array(null, 'qweqwe2'), false),
+			array(array('username', 'qweqwe2'), false),
+			array(array('email', 'qweqwe2'), false),
+			array(array('wrong', 'qweqwe'), false),
 		);
 	}
 	/**
@@ -88,9 +88,9 @@ class Auth_JamTest extends Testcase_Auth {
 		$user = Jam::find('test_user', 1);
 
 		return array(
-			array(1, '+2 days', TRUE),
-			array(2, '+2 days', TRUE),
-			array(3, 'last week', FALSE)
+			array(1, '+2 days', true),
+			array(2, '+2 days', true),
+			array(3, 'last week', false)
 		);
 	}
 
@@ -118,7 +118,7 @@ class Auth_JamTest extends Testcase_Auth {
 		$facebook
 			->expects($this->at(0))
 			->method('complete_login')
-			->will($this->returnValue(FALSE));
+			->will($this->returnValue(false));
 
 		// Second attempt succeeds
 		$facebook
@@ -139,7 +139,7 @@ class Auth_JamTest extends Testcase_Auth {
 	{
 		$facebook = $this->getMockBuilder('Auth_Service_Facebook')
 			->setMethods(array('get_user'))
-			->setConstructorArgs(array(array('auto_login' => TRUE, 'enabled' => TRUE)))
+			->setConstructorArgs(array(array('auto_login' => true, 'enabled' => true)))
 			->getMock();
 
 		$this->auth->set_service('facebook', $facebook);
@@ -147,7 +147,7 @@ class Auth_JamTest extends Testcase_Auth {
 		$facebook
 			->expects($this->once())
 			->method('get_user')
-			->will($this->returnValue(FALSE));
+			->will($this->returnValue(false));
 
 		// Should fire upt facebook's get_user method for login
 		$this->auth->auto_login();
@@ -157,7 +157,7 @@ class Auth_JamTest extends Testcase_Auth {
 	{
 		$facebook = $this->getMockBuilder('Auth_Service_Facebook')
 			->setMethods(array('get_user'))
-			->setConstructorArgs(array(array('auto_login' => TRUE, 'enabled' => TRUE)))
+			->setConstructorArgs(array(array('auto_login' => true, 'enabled' => true)))
 			->getMock();
 
 		$this->auth->set_service('facebook', $facebook);
@@ -165,7 +165,7 @@ class Auth_JamTest extends Testcase_Auth {
 		$facebook
 			->expects($this->once())
 			->method('get_user')
-			->will($this->returnValue(FALSE));
+			->will($this->returnValue(false));
 
 		// Should fire upt facebook's get_user method for login
 		$this->auth->get_user();

@@ -40,7 +40,7 @@ class Field_TwitterTest extends PHPUnit_Framework_TestCase {
 		$twitter_field = new Jam_Field_Twitter;
 		$user = Jam::build('test_user');
 
-		$this->assertEquals($twitter_field->set($user, $twitter, TRUE), $expected);
+		$this->assertEquals($twitter_field->set($user, $twitter, true), $expected);
 	}
 }
 

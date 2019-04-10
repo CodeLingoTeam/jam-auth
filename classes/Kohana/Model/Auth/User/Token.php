@@ -26,7 +26,7 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 				'token' => Jam::field('string'),
 				'type' => Jam::field('string'),
 				'created' => Jam::field('timestamp', array(
-					'auto_now_create' => TRUE,
+					'auto_now_create' => true,
 				)),
 				'expires' => Jam::field('timestamp', array(
 					'filters' => array('Model_Auth_User_Token::convert_expires')
@@ -37,7 +37,7 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 				'user' => Jam::association('belongsto'),
 			))
 
-			->validator('token', array("unique" => TRUE));
+			->validator('token', array("unique" => true));
 	}
 
 	public static function convert_expires($value)
@@ -57,7 +57,7 @@ class Kohana_Model_Auth_User_Token extends Jam_Model {
 
 	public static function generate_token()
 	{
-		return sha1(uniqid(Text::random('alnum', 32), TRUE));
+		return sha1(uniqid(Text::random('alnum', 32), true));
 	}
 
 	public function generate_unique_token()

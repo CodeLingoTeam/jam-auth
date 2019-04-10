@@ -26,7 +26,7 @@ class Kohana_Model_Auth_Role extends Jam_Model {
 				'users' => Jam::association('manytomany'),
 			))
 
-			->validator('name', array('present' => TRUE, 'length' => array('minimum' => 4, 'maximum' => 32), 'unique' => TRUE))
+			->validator('name', array('present' => true, 'length' => array('minimum' => 4, 'maximum' => 32), 'unique' => true))
 			->validator('description', array('length' => array('maximum' => 255)));
 
 	}

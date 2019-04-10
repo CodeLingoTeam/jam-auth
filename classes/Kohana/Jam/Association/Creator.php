@@ -12,13 +12,13 @@
 class Kohana_Jam_Association_Creator extends Jam_Association_Belongsto {
 
 	public $foreign_model = 'user';
-	public $required = TRUE;
+	public $required = true;
 
-	static public $current_user = NULL;
+	static public $current_user = null;
 
-	static public function current($creator = NULL)
+	static public function current($creator = null)
 	{
-		if ($creator !== NULL)
+		if ($creator !== null)
 		{
 			Jam_Association_Creator::$current_user = is_object($creator) ? $creator->id() : (int) $creator;			
 		}
@@ -31,7 +31,7 @@ class Kohana_Jam_Association_Creator extends Jam_Association_Belongsto {
 		
 		if ($this->required)
 		{
-			$meta->validator($name, array('present' => TRUE));
+			$meta->validator($name, array('present' => true));
 		}
 	}
 
@@ -40,7 +40,7 @@ class Kohana_Jam_Association_Creator extends Jam_Association_Belongsto {
 		if ( ! $is_changed AND ! $value AND ! $model->loaded() AND Jam_Association_Creator::current())
 		{
 			$value = Jam::find($this->foreign_model, Jam_Association_Creator::current());
-			$is_changed = TRUE;
+			$is_changed = true;
 			if ($this->inverse_of)
 			{
 				$value->{$this->inverse_of} = $model;

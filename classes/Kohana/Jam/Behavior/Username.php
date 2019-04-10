@@ -23,14 +23,14 @@ class Kohana_Jam_Behavior_Username extends Jam_Behavior {
 
 			->validator('username', array(
 				'length' => array('minimum' => 3, 'maximum' => 32),
-				'present' => TRUE,
+				'present' => true,
 				'format' => array('regex' => '/^[a-zA-Z0-9\_\-]+$/')
 			));
 	}
 
 	public function username_key($value)
 	{
-		return Valid::email($value) ? 'email' : ((is_numeric($value) OR $value === NULL) ? 'id' : 'username');
+		return Valid::email($value) ? 'email' : ((is_numeric($value) OR $value === null) ? 'id' : 'username');
 	}
 
 }

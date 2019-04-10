@@ -11,7 +11,7 @@
  */
 class Kohana_Model_Auth_User extends Jam_Model {
 
-	public $validate_password = FALSE;
+	public $validate_password = false;
 
 	public static function initialize(Jam_Meta $meta)
 	{
@@ -33,7 +33,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 				)),
 				'logins' => Jam::field('integer', array(
 					'default' => 0,
-					'convert_empty' => TRUE,
+					'convert_empty' => true,
 					'empty_value' => 0,
 				)),
 				'last_login' => Jam::field('timestamp'),
@@ -43,8 +43,8 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			))
 
 			->validator('email', array(
-				'format' => array('email' => TRUE),
-				'unique' => TRUE
+				'format' => array('email' => true),
+				'unique' => true
 			))
 			->validator('password', array(
 				'length' => array('minimum' => 5, 'maximum' => 30),
@@ -55,18 +55,18 @@ class Kohana_Model_Auth_User extends Jam_Model {
 			))
 			->validator('password', array(
 				'if' => 'validate_password',
-				'present' => TRUE,
-				'confirmed' => TRUE,
+				'present' => true,
+				'confirmed' => true,
 			))
 			->validator('password_confirmation', array(
-				'present' => TRUE,
+				'present' => true,
 				'if' => 'validate_password',
 			));
 	}
 
 	public static function unique_key($value)
 	{
-		return (is_numeric($value) OR $value === NULL) ? 'id' : 'email';
+		return (is_numeric($value) OR $value === null) ? 'id' : 'email';
 	}
 
 	/**
@@ -89,7 +89,7 @@ class Kohana_Model_Auth_User extends Jam_Model {
 		}
 	}
 
-	public function load_service_values(Auth_Service $service, array $user_data, $create = FALSE)
+	public function load_service_values(Auth_Service $service, array $user_data, $create = false)
 	{
 
 	}

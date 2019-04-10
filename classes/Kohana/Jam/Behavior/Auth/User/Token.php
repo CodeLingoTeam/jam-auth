@@ -8,15 +8,15 @@
  */
 class Kohana_Jam_Behavior_Auth_User_Token extends Jam_Behavior {
 
-	public function builder_call_valid_token(Database_Query $query, Jam_Event_Data $data, $token, $current_time = NULL)
+	public function builder_call_valid_token(Database_Query $query, Jam_Event_Data $data, $token, $current_time = null)
 	{
 		$query
 			->where('token', '=', $token)
-			->where('expires', '>=', ($current_time === NULL) ? time() : $current_time);
+			->where('expires', '>=', ($current_time === null) ? time() : $current_time);
 	}
 
-	public function builder_call_expired(Database_Query $query, Jam_Event_Data $data, $token = TRUE, $current_time = NULL)
+	public function builder_call_expired(Database_Query $query, Jam_Event_Data $data, $token = true, $current_time = null)
 	{
-		$query->where('expires', (bool) $token ? '<' : '>=', ($current_time === NULL) ? time() : $current_time);
+		$query->where('expires', (bool) $token ? '<' : '>=', ($current_time === null) ? time() : $current_time);
 	}
 }

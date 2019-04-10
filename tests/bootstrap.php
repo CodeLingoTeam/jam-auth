@@ -31,12 +31,12 @@ Kohana::$config
 				'database'   => 'test-jam-auth',
 				'username'   => 'root',
 				'password'   => '',
-				'persistent' => TRUE,
+				'persistent' => true,
 			),
 			'table_prefix' => '',
 			'identifier'   => '`',
 			'charset'      => 'utf8',
-			'caching'      => FALSE,
+			'caching'      => false,
 		));
 
 Kohana::$config
@@ -46,9 +46,9 @@ Kohana::$config
 		->set('hash_key', '11111')
 		->set('services', array(
 			'facebook' => array(
-				'enabled' => FALSE,
-				'auto_login' => TRUE,
-				'create_user' => TRUE,
+				'enabled' => false,
+				'auto_login' => true,
+				'create_user' => true,
 				'auth' => array(
 					'appId' => 'k',
 					'secret' => 's'
@@ -62,6 +62,6 @@ foreach (Database::instance(Kohana::TESTING)->query(Database::SELECT, 'SHOW TABL
 {
 	$table = $table['Tables_in_test-jam-auth'];
 
-	Database::instance(Kohana::TESTING)->query(NULL, "TRUNCATE `{$table}`");
+	Database::instance(Kohana::TESTING)->query(null, "TRUNCATE `{$table}`");
 }
 require_once __DIR__.'/database/fixtures/data.php';

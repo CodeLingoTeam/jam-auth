@@ -5,7 +5,7 @@ class Auth_Jam_Test extends Kohana_Auth_Jam {
 	protected function _load_user($user)
 	{
 		if ( ! $user)
-			return NULL;
+			return null;
 
 		return is_object($user) ? $user : Jam::find('test_user', $user);
 	}
@@ -13,18 +13,18 @@ class Auth_Jam_Test extends Kohana_Auth_Jam {
 	protected function _load_token($token)
 	{
 		if ( ! $token)
-			return NULL;
+			return null;
 
 		return is_object($token) ? $token : Jam::all('test_user_token')->valid_token($token)->first();
 	}
 
-	protected function _autologin_cookie($token = NULL, $expires = NULL)
+	protected function _autologin_cookie($token = null, $expires = null)
 	{
-		if ($token === FALSE)
+		if ($token === false)
 		{
 			unset($_COOKIE['authautologin']);
 		}
-		elseif ($token !== NULL)
+		elseif ($token !== null)
 		{
 			$_COOKIE['authautologin'] = $token;
 		}

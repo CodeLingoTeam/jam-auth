@@ -25,7 +25,7 @@ abstract class Kohana_Auth_Service {
 
 	protected $_role_model = 'role';
 
-	public function api($api = NULL)
+	public function api($api = null)
 	{
 		if ( ! $this->_api)
 		{
@@ -34,10 +34,10 @@ abstract class Kohana_Auth_Service {
 		return $this->_api;
 	}
 
-	public function __construct($config = NULL)
+	public function __construct($config = null)
 	{
 		$this->_config = (array) $config;
-		$this->_enabled = Arr::get($this->_config, 'enabled', FALSE);
+		$this->_enabled = Arr::get($this->_config, 'enabled', false);
 	}
 
 	public function type()
@@ -47,12 +47,12 @@ abstract class Kohana_Auth_Service {
 
 	public function auto_login_enabled()
 	{
-		return Arr::get($this->_config, 'auto_login', FALSE);
+		return Arr::get($this->_config, 'auto_login', false);
 	}
 
-	public function enabled($enabled = NULL)
+	public function enabled($enabled = null)
 	{
-		if ($enabled !== NULL)
+		if ($enabled !== null)
 		{
 			$this->_enabled = $enabled;
 			return $this;
@@ -60,14 +60,14 @@ abstract class Kohana_Auth_Service {
 		return $this->_enabled;
 	}
 
-	public function build_user($data, $create = TRUE)
+	public function build_user($data, $create = true)
 	{
 		if ($this->logged_in() AND ! empty($data))
 		{
 			$user = Jam::build($this->_user_model);
 
-			if ($user->load_service_values($this, $data, $create) === FALSE)
-				return FALSE;
+			if ($user->load_service_values($this, $data, $create) === false)
+				return false;
 
 			$user->roles->add(Jam::find($this->_role_model, 'login'));
 
@@ -82,7 +82,7 @@ abstract class Kohana_Auth_Service {
 		if ($this->enabled() AND $this->logged_in())
 		{
 			$user = Jam::find_or_build($this->_user_model, array($this->_service_field => $this->service_uid()));
-			$user->_is_new = TRUE;
+			$user->_is_new = true;
 			$data = $this->service_user_info();
 
 			if ( ! $user->loaded())
@@ -93,19 +93,19 @@ abstract class Kohana_Auth_Service {
 
 					if ($user->loaded())
 					{
-						$user->_is_new = FALSE;
+						$user->_is_new = false;
 
                         if (Arr::get($this->_config, 'update_user_on_link'))
                         {
-                            $user->load_service_values($this, $data, FALSE);
+                            $user->load_service_values($this, $data, false);
                         }
 					}
 				}
 
 				if ( ! $user->loaded() AND Arr::get($this->_config, 'create_user'))
 				{
-					$user = $this->build_user($data, TRUE);
-					$user->_is_new = TRUE;
+					$user = $this->build_user($data, true);
+					$user->_is_new = true;
 				}
 
 				if ( ! $user)
@@ -121,31 +121,31 @@ abstract class Kohana_Auth_Service {
 			}
 			elseif (Arr::get($this->_config, 'update_user'))
 			{
-				$user->_is_new = FALSE;
-				$user->load_service_values($this, $data, FALSE);
+				$user->_is_new = false;
+				$user->load_service_values($this, $data, false);
 				$user->save();
 			}
 			else
 			{
-				$user->_is_new = FALSE;
+				$user->_is_new = false;
 			}
 			return $user;
 		}
-		return FALSE;
+		return false;
 	}
 
 	public function logout()
 	{
 		if ( ! $this->enabled())
-			return FALSE;
+			return false;
 
-		return $this->logout_service(Request::initial(), URL::site(Request::current()->uri(), TRUE));
+		return $this->logout_service(Request::initial(), URL::site(Request::current()->uri(), true));
 	}
 
 	public function login()
 	{
 		if ( ! $this->enabled())
-			return FALSE;
+			return false;
 
 		if (($user = $this->get_user()))
 		{
@@ -153,17 +153,17 @@ abstract class Kohana_Auth_Service {
 		}
 		else
 		{
-			$login_url = $this->login_url(URL::site(Arr::get($this->_config, 'back_url', Request::current()->uri()), TRUE));
+			$login_url = $this->login_url(URL::site(Arr::get($this->_config, 'back_url', Request::current()->uri()), true));
 
 			HTTP::redirect($login_url);
-			return FALSE;
+			return false;
 		}
 	}
 
 	public function complete_login()
 	{
 		if ( ! $this->enabled())
-			return FALSE;
+			return false;
 
 		if ( ! $this->logged_in()) {
 			$this->service_login_complete();
@@ -174,7 +174,7 @@ abstract class Kohana_Auth_Service {
 			return $user;
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	abstract public function initialize();

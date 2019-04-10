@@ -13,7 +13,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 
 	public static function clear_cache()
 	{
-		Auth_Jam::$_instance = NULL;
+		Auth_Jam::$_instance = null;
 	}
 
 	public static function access($action, $access = array())
@@ -44,9 +44,9 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * @param  string $name the name of the service, e.g. 'facebook'
 	 * @return array|Auth_Service
 	 */
-	public function services($name = NULL)
+	public function services($name = null)
 	{
-		return $name === NULL ? $this->_services : Arr::get($this->_services, $name);
+		return $name === null ? $this->_services : Arr::get($this->_services, $name);
 	}
 
 	/**
@@ -55,23 +55,23 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * @param   mixed    $role Role name string, role Jam object, or array with role names
 	 * @return  boolean
 	 */
-	public function logged_in($role = NULL)
+	public function logged_in($role = null)
 	{
 		// Get the user from the session
 		$user = $this->get_user();
 
 		if ( ! $user)
-			return FALSE;
+			return false;
 
 		if ($user instanceof Model_Auth_User AND $user->loaded())
 		{
 			// If we don't have a roll no further checking is needed
 			if ( ! $role)
-				return TRUE;
+				return true;
 
 			if (is_array($role))
 			{
-				return ! array_diff($role, $user->roles->as_array(NULL, 'name'));
+				return ! array_diff($role, $user->roles->as_array(null, 'name'));
 			}
 			elseif (is_string($role) OR $role instanceof Model_Auth_Role)
 			{
@@ -82,7 +82,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 				throw new Kohana_Exception('Invalid Role ":role"', array("role" => (string) $role));
 			}
 		}
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -120,7 +120,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 		// If the passwords match, perform a login
 		if ($user AND $user->roles->has('login') AND $user->password === $password)
 		{
-			if ($remember === TRUE)
+			if ($remember === true)
 			{
 				$this->remember($user);
 			}
@@ -128,11 +128,11 @@ abstract class Kohana_Auth_Jam extends Auth {
 			// Finish the login
 			$this->complete_login($user);
 
-			return TRUE;
+			return true;
 		}
 
 		// Login failed
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -158,14 +158,14 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * @param   boolean  $remember                force to remeber the user
 	 * @return  boolean
 	 */
-	public function force_login($user, $mark_session_as_forced = FALSE, $remember = FALSE)
+	public function force_login($user, $mark_session_as_forced = false, $remember = false)
 	{
 		$user = $this->_load_user($user);
 
-		if ($mark_session_as_forced === TRUE)
+		if ($mark_session_as_forced === true)
 		{
 			// Mark the session as forced, to prevent users from changing account information
-			$this->session()->set('auth_forced', TRUE);
+			$this->session()->set('auth_forced', true);
 		}
 
 		if ($remember)
@@ -185,7 +185,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	public function login_with_token($token)
 	{
 		if ( ! $token)
-			return NULL;
+			return null;
 
 		// Load the token and user
 		$token = $this->_load_token($token);
@@ -228,11 +228,11 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * @param  boolean $remember create autologin token
 	 * @return Model_User|NULL
 	 */
-	public function complete_login_with_service($name, $remember = FALSE)
+	public function complete_login_with_service($name, $remember = false)
 	{
 		if ($user = $this->services($name)->complete_login())
 		{
-			if ($remember === TRUE)
+			if ($remember === true)
 			{
 				$this->remember($user);
 			}
@@ -242,7 +242,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			return $user;
 		}
 
-		return NULL;
+		return null;
 	}
 
 	/**
@@ -260,7 +260,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			}
 			else
 			{
-				$this->_autologin_cookie(FALSE);
+				$this->_autologin_cookie(false);
 			}
 		}
 
@@ -280,7 +280,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 			}
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**
@@ -289,7 +289,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 *
 	 * @return  mixed
 	 */
-	public function get_user($default = NULL)
+	public function get_user($default = null)
 	{
 		// Load the session for the parent method
 		$this->session();
@@ -307,7 +307,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	protected function _load_user($user)
 	{
 		if ( ! $user)
-			return NULL;
+			return null;
 
 		return is_object($user) ? $user : Jam::find('user', $user);
 	}
@@ -315,7 +315,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	protected function _load_token($token)
 	{
 		if ( ! $token)
-			return NULL;
+			return null;
 
 		return is_object($token) ? $token : Jam::all('user_token')->valid_token($token)->first();
 	}
@@ -328,13 +328,13 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * @param  integer $expires days lifetime
 	 * @return mixed
 	 */
-	protected function _autologin_cookie($token = NULL, $expires = NULL)
+	protected function _autologin_cookie($token = null, $expires = null)
 	{
-		if ($token === FALSE)
+		if ($token === false)
 		{
 			Cookie::delete('authautologin');
 		}
-		elseif ($token !== NULL)
+		elseif ($token !== null)
 		{
 			Cookie::set('authautologin', $token, $expires);
 		}
@@ -352,7 +352,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 	 * @param	boolean  $logout_all  remove all tokens for user
 	 * @return  boolean
 	 */
-	public function logout($destroy = FALSE, $logout_all = FALSE)
+	public function logout($destroy = false, $logout_all = false)
 	{
 		// Set by force_login()
 		$this->session()->delete('auth_forced');
@@ -360,7 +360,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 		if ($token = $this->_autologin_cookie())
 		{
 			// Delete the autologin cookie to prevent re-login
-			$this->_autologin_cookie(FALSE);
+			$this->_autologin_cookie(false);
 
 			// Clear the autologin token from the database
 			$token = $this->_load_token($token);
@@ -416,7 +416,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 		// Store username in session
 		$this->session()->set($this->_config['session_key'], $user->id);
 
-		return TRUE;
+		return true;
 	}
 
 	/**
@@ -430,7 +430,7 @@ abstract class Kohana_Auth_Jam extends Auth {
 		$user = $this->get_user();
 
 		if ( ! $user)
-			return FALSE;
+			return false;
 
 		return ($this->hash($password) === $user->password);
 	}
